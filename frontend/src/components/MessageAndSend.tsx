@@ -36,7 +36,7 @@ export default function MessageAndSend() {
         socket.on('connect', () => {
             setIsConnected(true);
         });
-        socket.on("message", (message) => {
+        socket.on("messageClient", (message) => {
             setMessages(message)
         })
         socket.on("disconnect", () => {
