@@ -2,10 +2,7 @@ import { Grid, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
 import Message from '../interface/message';
 export default function Messages(props: {onSend:() => void; user: Message | undefined}) {
-  const [messages, setMessages] = useState<Message[]>([{
-    username: "john",
-    text: "hellos",
-  }])
+  const [messages, setMessages] = useState<Message[]>([])
 
   useEffect(() => {
     if(props.user){

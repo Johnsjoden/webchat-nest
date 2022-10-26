@@ -1,14 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Grid, Button, Input, Typography } from '@mui/material';
+import { Grid, Button, Input, Typography, Card } from '@mui/material';
 import { Box } from '@mui/system';
 import Message from '../interface/message';
 import { io } from 'socket.io-client';
-const socket = io("http://localhost:3000")
+const socket = io("http://localhost:4000")
 export default function MessageAndSend() {
     const fake_message = {
         id: "1",
         text: "hellos",
         username: "john",
+        timeStamp: "aom"
     }
     const [messageText, setMessageText] = useState<string>()
     const [message, setMessage] = useState<Message>(fake_message)
@@ -19,7 +20,7 @@ export default function MessageAndSend() {
         if (user) {
             setMessage({
                 text: message,
-                username: user,
+                username: user
             })
         }
     }
@@ -52,11 +53,13 @@ export default function MessageAndSend() {
             <Grid sx={{ display: "flex", justifyContent: "left" }}>
                 <Button onClick={() => logOut()}>Log out</Button>
             </Grid>
-            <Grid direction="column" sx={{ display: "flex", border: 1, padding: "120px", borderRadius: 5 }}>
+            <Grid >
                 {messages.map((item, index) => {
-                    return <Grid key={index} sx={{ display: "flex", justifyContent: "center" }}>
-                        <Typography >{item.text}</Typography>
-                    </Grid>
+                    return <Grid direction="column" sx={{ width: "20%", justifyContent: "center", border: 1, padding: "15px", borderRadius: 5  }}>
+                            <Typography variant="h5">{item.username}</Typography>
+                            <Typography >{item.text}</Typography>
+                            <Typography>{item.timeStamp}</Typography>
+                        </Grid>
                 })}
             </Grid>
 
