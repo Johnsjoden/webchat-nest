@@ -1,8 +1,8 @@
-import { AnyFilesInterceptor } from '@nestjs/platform-express';
+
 import { SubscribeMessage, WebSocketGateway } from '@nestjs/websockets';
 import { Socket } from 'socket.io';
-import { Message } from './messages/message.interface';
-import { MessagesService } from './messages/messages.service';
+import { Message } from '../messages/message.interface';
+import { MessagesService } from '../messages/messages.service';
 
 @WebSocketGateway({ cors: { origin: "*" } })
 export class EventsGateway {

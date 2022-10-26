@@ -3,7 +3,7 @@ import { Grid, Button, Input, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import Message from '../interface/message';
 import { io } from 'socket.io-client';
-const socket = io("http://localhost:3001")
+const socket = io("http://localhost:3000")
 export default function MessageAndSend() {
     const fake_message = {
         id: "1",
@@ -24,6 +24,7 @@ export default function MessageAndSend() {
         }
     }
     const sendMessage = (): void => {
+        console.log(message)
         socket.emit("message", message)
 
     }
