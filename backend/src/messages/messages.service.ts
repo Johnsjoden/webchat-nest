@@ -1,17 +1,20 @@
 import { Injectable } from '@nestjs/common';
 import { timeStamp } from 'console';
-import { Message } from './message.interface';
-
+import { Messages } from './messages.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 @Injectable()
 export class MessagesService {
-    private readonly messages: Message[] = [
-    ]
-    getAllMessages(): Message[] {
-        return this.messages
+    constructor(@InjectRepository(Messages) private msgDB: Repository<Messages>) { }
+    /* private readonly messages: Messages[] = [
+    ] */
+    getAllMessages(): Promise<Messages[]> {
+        const result = this.msgDB.find()
+        return result
     }
-    createMessage(message: Message): void {
+    async createMessage(message: Messages): Promise<void> {
         let currentDate = new Date().getTime()
         message.timeStamp = new Date(currentDate).toLocaleString()
-        this.messages.push(message)
+        const result = await this.msgDB.save({...message})
     }
 }
