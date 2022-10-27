@@ -5,15 +5,12 @@ services:
       dockerfile: Dockerfile.backend
     ports:
       - "4000:4000"
-    environment:
-      - MONGODB_URL=mongodb://db:27017/mytodos
-      - PORT = 4000
 
   frontend:
     build:
       dockerfile: Dockerfile.frontend
       args:
-        APP_TODO_API: http://localhost:4000
+        APP_WEBCHAT_API: http://localhost:4000
     ports:
       - "3000:3000"
 

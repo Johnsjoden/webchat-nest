@@ -1,16 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
-
-@Entity()
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import mongoose, { Document } from 'mongoose';
+export type MessagesDocument = Messages & Document;
+@Schema()
 export class Messages {
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+    @Prop({
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        auto: true,
+    })
+    _id: string;
 
-    @Column()
+    @Prop()
     username: string;
 
-    @Column()
+    @Prop()
     text: string;
 
-    @Column()
+    @Prop()
     timeStamp: string;
 }
+export const MessagesSchema = SchemaFactory.createForClass(Messages);

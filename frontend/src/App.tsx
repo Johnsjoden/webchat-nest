@@ -4,6 +4,9 @@ import { Box } from '@mui/system';
 import React from 'react';
 import MessageAndSend from './components/MessageAndSend';
 import Login from "./components/Login"
+import axios from 'axios';
+console.log(process.env.REACT_APP_WEBCHAT_API)
+axios.defaults.baseURL = process.env.REACT_APP_WEBCHAT_API
 const username = localStorage.getItem("username")
 function App() {
   /* type todoItem = {
@@ -16,9 +19,10 @@ function App() {
     return [...todo, { text: "hello" }]
   }
   const [todo, dispatch] = useReducer(todoReducer, [{ text: "hellooo" }]) */
+
   return (
     <Box sx={{ margin: "25px" }}>
-      {username? <MessageAndSend /> : <Login />}
+      {username ? <MessageAndSend /> : <Login />}
     </Box>
   );
 }

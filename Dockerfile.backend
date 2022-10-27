@@ -3,15 +3,15 @@ FROM node:16-alpine
 WORKDIR /usr/src/app
 
 COPY ./package*.json ./
-COPY ./packages/backend/package*.json ./packages/backend/
-COPY ./packages/shared/package*.json ./packages/shared/
+COPY ./backend/package*.json ./backend/
 
-RUN npm ci backend
+RUN npm run buildCiBackend
 
-COPY ./packages/backend/ ./packages/backend/
-COPY ./packages/shared/ ./packages/shared/
+COPY ./backend/ ./backend/
 RUN npm run buildBackend
 
-EXPOSE 4000
+ENV BACKEND_PORT=4000
+ENV MONGODB_URL=mongodb://db:27017/webchat
 
-CMD ["node", "packages/backend/dist/main.js"]
+EXPOSE 4000
+CMD ["node", "backend/dist/main.js"]

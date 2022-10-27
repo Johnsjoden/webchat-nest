@@ -5,14 +5,14 @@ WORKDIR /usr/src/app
 COPY ./package*.json ./
 COPY ./frontend/package*.json ./frontend/
 
-RUN npm ci frontend
+RUN npm run buildCiFrontend
 
 COPY ./frontend/ ./frontend/
 
-ARG APP_TODO_API
-ENV REACT_APP_TODO_API ${APP_TODO_API}
+ARG APP_WEBCHAT_API
+ENV REACT_APP_WEBCHAT_API ${APP_WEBCHAT_API}
 RUN npm run buildFrontend
 
 EXPOSE 3000
 
-CMD ["npx", "serve", "packages/frontend/build"]
+CMD ["npx", "serve", "frontend/build"]

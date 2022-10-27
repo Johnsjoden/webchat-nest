@@ -20,9 +20,8 @@ export class EventsGateway {
   @SubscribeMessage("message")
   async handleEvent(client: Socket, payload: Messages): Promise<void> {
     await this.messageService.createMessage(payload)
-    const message = await this.messageService.getAllMessages()
+    const message = await this.messageService.findAll()
     console.log(message)
     this.server.emit("messageClient", message)
   }
-
 }

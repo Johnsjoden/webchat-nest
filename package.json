@@ -1,0 +1,24 @@
+{
+  "name": "webchat-nest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "buildCiBackend": "cd backend && npm ci",
+    "buildCiFrontend": "cd frontend && npm ci",
+    "buildFrontend": "cd frontend && npm run build",
+    "buildBackend": "cd backend && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Johnsjoden/webchat-nest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Johnsjoden/webchat-nest/issues"
+  },
+  "homepage": "https://github.com/Johnsjoden/webchat-nest#readme"
+}
