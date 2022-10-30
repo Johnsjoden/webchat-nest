@@ -19,9 +19,14 @@ export class EventsGateway {
   }
   @SubscribeMessage("message")
   async handleEvent(client: Socket, payload: Messages): Promise<void> {
-    await this.messageService.createMessage(payload)
-    const message = await this.messageService.findAll()
-    console.log(message)
-    this.server.emit("messageClient", message)
+    if (!payload.text || !payload.username) {
+      client.emit("messageError", "Enter a message")
+    } else {
+      await this.messageService.createMessage(payload)
+      const message = await this.messageService.findAll()
+      console.log(message)
+      this.server.emit("messageClient", message)
+    }
+
   }
 }

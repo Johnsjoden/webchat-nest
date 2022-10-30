@@ -21,16 +21,11 @@ export default function MessageAndSend() {
             })
         }
     }
-    const sendMessage = async (e: any): Promise<void> => {
+    const sendMessage = (e: any): void => {
         const user = localStorage.getItem("username")
-        if (!user || text.length < 1) {
-            setError("enter a username and a message")
-        } else {
-            e.preventDefault()
-            await socket.emit("message", message)
-            window.location.href = '#buttonScroll';
-        }
-
+        e.preventDefault()
+        socket.emit("message", message)
+        window.location.href = '#buttonScroll';
     }
     const logOut = (): void => {
         localStorage.removeItem("username")
@@ -46,7 +41,11 @@ export default function MessageAndSend() {
         socket.on('connect', () => {
             setIsConnected(true);
         });
+        socket.on("messageError", (error: string) => {
+            setError(error)
+        })
         socket.on("messageClient", (messages: Message[]) => {
+            setError("")
             setMessages(messages)
             window.location.href = '#buttonScroll';
         })
